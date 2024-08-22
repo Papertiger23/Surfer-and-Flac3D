@@ -28,6 +28,7 @@ program log-file 'zoneinfo105.log'
 zone list information range position-x 0 500 position-y 0 300 position-z 10  13 
 
 program log off
+
 #########################################################
 
 
