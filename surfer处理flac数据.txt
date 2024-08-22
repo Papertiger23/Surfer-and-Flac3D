@@ -1,0 +1,70 @@
+
+
+
+rest 100n.sav
+set logfile  100mei.dat
+set log on
+print zone extra 1 range x 0 500 y 0 300 z 26.5 27.5
+print zone info range x 0 500 y 0 300 z 26.5 27.5
+set log off
+
+
+
+
+
+
+
+fish define aba
+  aa = 80 
+  n = 1
+  loop while aa>40
+     p_z = zone.near(aa,200,19.5)
+     cc =  zone.stress.zz(p_z)
+     table.y(1,n) = cc
+     table.x(1,n) = aa
+     ww = table.y(1,n)
+     bb = table.x(1,n)
+     aa = aa - 0.2
+     n = n + 1
+    endloop
+end
+@aba
+table 1 list
+
+
+
+
+
+
+extra 1根据需要改成应力或者位移
+下面那一行是你想输出的那个平面
+
+
+
+
+
+https://zhidao.baidu.com/question/983195057530214859.html
+
+1、首先rest123.sav，然后再callFLAC3d2Tecplop生成Tec10.dat。
+2、打开Tecplot程序，执行【File】/【Load Data File】命令，打开数据文件对话框，选择刚刚生成的tec10.dat文件，并执行【打开】命令，在出现的Select Initial Plot 对话框中，单击OK按钮。并在Tecplot左上角显示的3维笛卡尔坐标系下选择【3D Cartasion 】。
+3、在Tecplot中选中【Data】→【Extract】→【Slice from Plane】，打开切面对话框。在对话框中我们可以选中x=6/y=5/z=7等切片，并单击Extract.
+4、在Tecplot中选中【File】→【White Data File】，打开【White Data File Options】对话框，对话框中选中ASCII、Point。并在下面的Zone（s）选项中选中你所要的2 SLc=3，在Variable(s)中同时选中1 x（m）,2 y(m)及你所要的13 szz（pa）等，并单击OK按钮。保存的文件自己最好独自命名（如tec-90.dat格式）。
+5、以txt格式打开刚才命名的tec-90.dat，把里面的三列数复制到txt里面后再导入Excel里面，同时在Excel里面把szz的值变成相反的值保存在D列，（txt里面注意不是三列的都不要，只复制三列数据，把前面的和后面的都去掉）。
+6、打开surfer，【网格】→【数据】，选中刚才生成的123.xls(即刚才生成的Excel数据，选中相应的A、B和D列),并单击打开。对于【网格化数据】选项单则单击【确定】，则会生成与123.xls相对应的123.grd（即与刚才生成的Excel文件名相同）
+7、在【地图】→【表面图】单击，在【打开网格对话框】中选中生成的123.grd文件，并单击打开。
+8、右击图片选中【属性】并打击打开，可以对网格、颜色进行设置（颜色谱选
+安装文件夹中的rainbow.CLR即可。具体是在打开的【属性对话框】→【常规】→【材质颜色】→【上部】单击上部中的颜色，在颜色谱中选择【载入】，在打开里面选中安装文件夹里面的rainbow.CLR即可，在多次确认）
+9、此外也可以在surfer里面对其他参数进行设置。
+
+
+
+model restore 'tunnel.sav'
+log-file 'tunnel.dat'
+
+log on
+print zone extra 1 range position-x 0 500 position-y 0 300 position-z 16.0 16.5
+print zone info range  position-x 0 500 position-y 0 300 position-z 16.0 16.5
+log off
+
+
+print zone stress  range position-x 0 500 position-y 0 300 position-z 16.0 16.5
