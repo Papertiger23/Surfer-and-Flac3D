@@ -1,0 +1,16 @@
+fish define aba
+  aa = 80 
+  n = 1
+  loop while aa>40
+     p_z = zone.near(aa,200,19.5)
+     cc =  zone.stress.zz(p_z)
+     table.y(1,n) = cc
+     table.x(1,n) = aa
+     ww = table.y(1,n)
+     bb = table.x(1,n)
+     aa = aa - 0.2
+     n = n + 1
+    endloop
+end
+@aba
+table 1 list
